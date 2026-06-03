@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Classification Portal</title>
+  <link rel="stylesheet" href="{{ url_for('asset_file', filename='style.css') }}" />
+</head>
+<body>
+  <header class="navbar">
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="primary-link" href="{{ url_for('register') }}">Register</a>
+      <a href="{{ url_for('login') }}">Log In</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <section class="hero-content">
+      <h1>Image Classification Portal</h1>
+      <p class="subtitle">Upload images and classify them as Human, Animal, or Non-Living Thing.</p>
+    </section>
+  </main>
+</body>
+</html>

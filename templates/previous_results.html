@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Previous Results | Image Classification Portal</title>
+  <link rel="stylesheet" href="{{ url_for('asset_file', filename='style.css') }}" />
+</head>
+<body>
+  <header class="navbar">
+    <nav class="nav-links" aria-label="Dashboard navigation">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a class="primary-link" href="{{ url_for('previous_results') }}">Previous Results</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-page">
+    <section class="dashboard-card empty-results">
+      <h1>Previous Results</h1>
+      <p>Uploaded images and classification results will be shown here after the upload feature is connected.</p>
+      <a class="card-link" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </section>
+  </main>
+</body>
+</html>
