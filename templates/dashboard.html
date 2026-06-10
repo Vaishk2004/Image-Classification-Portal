@@ -22,8 +22,7 @@
   <main class="dashboard-page">
     <section class="dashboard-header">
       <p class="dashboard-label">Image Classification Portal</p>
-      <h1>Dashboard</h1>
-      <p>Upload an image to classify it as Human, Animal, or Non-Living Thing.</p>
+      
     </section>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -41,32 +40,38 @@
         <h2>Upload Image</h2>
         <p>Select a JPG, JPEG, or PNG image for classification.</p>
 
-        <form class="upload-form" action="#" method="POST" enctype="multipart/form-data">
+        <form class="upload-form" action="{{ url_for('dashboard') }}" method="POST" enctype="multipart/form-data">
           <label class="file-drop" for="image_file">
             <span>Choose image file</span>
             <small>Supported formats: JPG, JPEG, PNG</small>
           </label>
           <input type="file" id="image_file" name="image_file" accept=".jpg,.jpeg,.png" />
-          <button type="button">Classify Image</button>
+          <button type="submit">Classify Image</button>
         </form>
-      </div>
-
-      <div class="dashboard-card result-card">
-        <h2>Classification Result</h2>
-        <div class="result-placeholder">
-          <span>No image classified yet</span>
-          <p>Your prediction result and confidence score will appear here.</p>
-        </div>
-        <div class="result-row">
-          <span>Predicted Category</span>
-          <strong>Waiting for upload</strong>
-        </div>
-        <div class="result-row">
-          <span>Confidence Score</span>
-          <strong>--</strong>
-        </div>
       </div>
     </section>
   </main>
+
+  {% if result %}
+    <div class="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-title">
+      <div class="result-modal-card">
+        <a class="modal-close" href="{{ url_for('dashboard') }}" aria-label="Close result popup">x</a>
+        <h2 id="result-title">Classification Result</h2>
+        <img class="result-image" src="{{ result.image_url }}" alt="Uploaded image preview" />
+        <div class="result-row">
+          <span>Predicted Category</span>
+          <strong>{{ result.predicted_category }}</strong>
+        </div>
+        <div class="result-row">
+          <span>Confidence Score</span>
+          <strong>{{ result.confidence_score }}%</strong>
+        </div>
+        <div class="result-row">
+          <span>Upload Time</span>
+          <strong>{{ result.uploaded_at }}</strong>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 </body>
 </html>

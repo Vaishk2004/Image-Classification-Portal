@@ -17,11 +17,42 @@
   </header>
 
   <main class="dashboard-page">
-    <section class="dashboard-card empty-results">
+    <section class="dashboard-header">
+      <p class="dashboard-label">Image Classification Portal</p>
       <h1>Previous Results</h1>
-      <p>Uploaded images and classification results will be shown here after the upload feature is connected.</p>
-      <a class="card-link" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+      <p>Review your uploaded images, predictions, confidence scores, and upload times.</p>
     </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="dashboard-messages" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+
+    {% if results %}
+      <section class="results-grid">
+        {% for item in results %}
+          <article class="history-card">
+            <img src="{{ url_for('uploaded_image', filename=item.stored_filename) }}" alt="Uploaded image" />
+            <div class="history-content">
+              <h2>{{ item.predicted_category }}</h2>
+              <p>Confidence: {{ item.confidence_score }}%</p>
+              <p>Uploaded: {{ item.uploaded_at.strftime("%d %b %Y, %I:%M %p") }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </section>
+    {% else %}
+      <section class="dashboard-card empty-results">
+        <h1>No Previous Results</h1>
+        <p>Your uploaded images and classification results will be shown here.</p>
+        <a class="card-link" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+      </section>
+    {% endif %}
   </main>
 </body>
 </html>

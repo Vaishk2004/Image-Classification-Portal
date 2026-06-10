@@ -34,6 +34,8 @@
       {% endwith %}
 
       <form class="auth-form" method="POST" action="{{ url_for('login') }}" novalidate>
+        <input type="hidden" name="next" value="{{ next_page }}" />
+
         <label for="email">Email Address</label>
         <input
           type="email"

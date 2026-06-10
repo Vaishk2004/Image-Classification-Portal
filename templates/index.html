@@ -11,14 +11,14 @@
     <nav class="nav-links" aria-label="Main navigation">
       <a class="primary-link" href="{{ url_for('register') }}">Register</a>
       <a href="{{ url_for('login') }}">Log In</a>
-      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('login', next=url_for('dashboard')) }}">Dashboard</a>
     </nav>
   </header>
 
   <main class="hero">
     <section class="hero-content">
       <h1>Image Classification Portal</h1>
-      <p class="subtitle">Upload images and classify them as Human, Animal, or Non-Living Thing.</p>
+      
     </section>
   </main>
 </body>
